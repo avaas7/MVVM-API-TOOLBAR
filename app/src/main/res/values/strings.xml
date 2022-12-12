@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AyataWeather</string>\
+    <string name="search">Search for a city or airport</string>
+</resources>

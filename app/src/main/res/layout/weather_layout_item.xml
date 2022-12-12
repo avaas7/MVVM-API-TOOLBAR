@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="197dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="24dp"
+    android:background="@drawable/ic_rectangle_half_transparent">
+
+    <TextView
+        android:id="@+id/rv_weather_temperature"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginRight="227dp"
+        android:layout_marginBottom="85dp"
+        android:text="100°"
+        android:textColor="@color/white"
+        android:textSize="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autoSizeMaxTextSize="64dp"
+        android:autoSizeMinTextSize="30dp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeStepGranularity="2sp"
+        />
+<!--        android:autoSizePresetSizes=""-->
+<!--        android:autoSizeTextType="uniform"-->
+<!--        android:autoSizeMinTextSize="12sp"-->
+<!--        android:autoSizeMaxTextSize="100sp"-->
+<!--        android:autoSizeStepGranularity="2sp"-->
+<!--        />-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="123dp"
+        android:layout_marginRight="186dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.181"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/rv_pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="H:24°  L:18°"
+            android:textColor="#99EBEBF5"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/rv_city_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Montreal, Canada"
+            android:textColor="#99EBEBF5"
+            android:textSize="13dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/rv_weather_wind"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="265dp"
+        android:layout_marginTop="146dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="20dp"
+        android:text="Mid Wind"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/rv_image_view_layout"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginLeft="178dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="37dp"
+        android:src="@drawable/moon_cloud_mid_rain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
