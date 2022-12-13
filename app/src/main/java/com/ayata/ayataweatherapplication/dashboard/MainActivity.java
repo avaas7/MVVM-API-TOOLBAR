@@ -2,6 +2,7 @@ package com.ayata.ayataweatherapplication.dashboard;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +26,7 @@ import com.ayata.ayataweatherapplication.databinding.ActivityMainBinding;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding mainxml;
@@ -42,8 +44,20 @@ public class MainActivity extends AppCompatActivity {
         mainxml = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainxml.getRoot());
 
+        //search view
+        mainxml.mainSearchView.clearFocus();
+        mainxml.mainSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
 
         initRecyclerView();
  //       observeLogin();
@@ -84,6 +98,26 @@ public class MainActivity extends AppCompatActivity {
                 popupMenu.show();
             }
         });
+    }
+
+    private void filterList(String text) {
+        List<WeatherInfo> weatherInfoList = new ArrayList<>();
+        for (WeatherInfo item : weatherInfos)
+        {
+            if (item.getCity().toLowerCase().contains(text.toLowerCase())){
+                weatherInfoList.add(item);
+            }
+        }
+
+        if (weatherInfoList.isEmpty())
+        {
+            Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            weatherAdapter.setFilteredList(weatherInfoList);
+        }
+
     }
 //
 //    private void observeLogin() {
@@ -129,12 +163,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         weatherInfos = new ArrayList<>();
-        weatherInfos.add(new WeatherInfo(temp,tempMin,tempMax,city,country, R.drawable.moon_cloud_mid_rain,wind));
-        weatherInfos.add(new WeatherInfo(temp,tempMin,tempMax,city,country, R.drawable.moon_cloud_mid_rain,wind));
-        weatherInfos.add(new WeatherInfo(temp,tempMin,tempMax,city,country, R.drawable.moon_cloud_mid_rain,wind));
-        weatherInfos.add(new WeatherInfo(temp,tempMin,tempMax,city,country, R.drawable.moon_cloud_mid_rain,wind));
-        weatherInfos.add(new WeatherInfo(temp,tempMin,tempMax,city,country, R.drawable.moon_cloud_mid_rain,wind));
-        weatherInfos.add(new WeatherInfo(temp,tempMin,tempMax,city,country, R.drawable.moon_cloud_mid_rain,wind));
+        weatherInfos.add(new WeatherInfo(temp,tempMin,tempMax,city.toLowerCase(),country, R.drawable.moon_cloud_mid_rain,wind));
+        weatherInfos.add(new WeatherInfo(temp+1,tempMin+1,tempMax+2,"delhi","India", R.drawable.sun_cloud_angled_rain,wind+1));
+        weatherInfos.add(new WeatherInfo(temp+2,tempMin+2,tempMax+2,"pokhara","nepal", R.drawable.sun_cloud_mid_rain,wind+2));
+        weatherInfos.add(new WeatherInfo(temp+3,tempMin+3,tempMax+3,"las Vegas","USA", R.drawable.sun_cloud_angled_rain,wind+3));
+        weatherInfos.add(new WeatherInfo(temp+5,tempMin+4,tempMax+4,"paris","France", R.drawable.moon_cloud_fast_wind,wind+4));
+        weatherInfos.add(new WeatherInfo(temp+6,tempMin+5,tempMax+5,"london","England", R.drawable.sun_cloud_angled_rain,wind+5));
 
 
         Log.e("tag",weatherInfos.toString());

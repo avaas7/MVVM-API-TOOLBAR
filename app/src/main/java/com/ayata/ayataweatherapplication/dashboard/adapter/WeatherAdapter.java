@@ -19,6 +19,12 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
         this.weatherInfos = weatherInfos;
     }
 
+    public void setFilteredList(List<WeatherInfo> filteredList)
+    {
+        this.weatherInfos = filteredList;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
