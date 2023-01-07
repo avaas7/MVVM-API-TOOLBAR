@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dashboard.SignIn"
+    android:background="@drawable/home_background"
+    android:fitsSystemWindows="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weather"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/white"
+            />
+        <EditText
+            android:layout_marginTop="32dp"
+            android:id="@+id/et_username"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="username"
+            android:padding="16dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:background="@drawable/custom_input"
+            android:textColor="@color/black"
+            />
+        <EditText
+            android:id="@+id/et_description"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="description"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:background="@drawable/custom_input"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/bt_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:text="sign in"
+            android:layout_marginTop="64dp"
+            />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

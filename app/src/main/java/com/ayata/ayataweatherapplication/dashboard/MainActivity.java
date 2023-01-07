@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,12 +23,17 @@ import com.ayata.ayataweatherapplication.dashboard.weathermodel.ModelCurrentWeat
 import com.ayata.ayataweatherapplication.dashboard.weathermodel.WeatherInfo;
 import com.ayata.ayataweatherapplication.dashboard.weatherviewmodel.WeatherViewModel;
 import com.ayata.ayataweatherapplication.databinding.ActivityMainBinding;
+import com.ayata.ayataweatherapplication.room.Entity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding mainxml;
 
@@ -36,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     WeatherAdapter weatherAdapter;
     WeatherViewModel weatherViewModel;
 
+    String username;
+    String description;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
         mainxml = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainxml.getRoot());
+
+        Bundle extras = getIntent().getExtras();
+        username = extras.getString("username");
+        description = extras.getString("desc");
+
+        mainxml.progressBar.setVisibility(View.VISIBLE);
 
         //search view
         mainxml.mainSearchView.clearFocus();
@@ -119,15 +134,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-//
-//    private void observeLogin() {
-//        weatherViewModel.getProgressBarObservable().observe(this, new Observer<Boolean>() {
-//            @Override
-//            public void onChanged(Boolean aBoolean) {
-//
-//            }
-//        });
-//    }
 
 
     private void initRecyclerView() {
@@ -135,8 +141,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         mainxml.mainRvWeather.setLayoutManager(layoutManager);
 
-        weatherViewModel = ViewModelProviders.of(this).get(WeatherViewModel.class);
-
+        weatherViewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
         weatherViewModel.getModelCurrentWeather().observe(this, new Observer<ModelCurrentWeather>() {
             @Override
             public void onChanged(ModelCurrentWeather modelCurrentWeather) {
@@ -144,9 +149,21 @@ public class MainActivity extends AppCompatActivity {
                 weatherAdapter = new WeatherAdapter(weatherInfos);
                 mainxml.mainRvWeather.setAdapter(weatherAdapter);
                 weatherAdapter.notifyDataSetChanged();
+                mainxml.progressBar.setVisibility(View.INVISIBLE);
             }
         });
 
+        weatherViewModel.insert(new Entity(new Random().nextInt(1000) + 1,username,description));
+
+
+        //getting data from Room Database
+        weatherViewModel.getData(username).observe(this, new Observer<Entity>() {
+            @Override
+            public void onChanged(Entity entity) {
+                mainxml.username.setText(entity.getName());
+                mainxml.description.setText(entity.getDescription());
+            }
+        });
 
     }
 
@@ -180,15 +197,5 @@ public class MainActivity extends AppCompatActivity {
         double c = kelvin- 273.15;
         return  c;
     }
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(//layout,menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }*/
 }

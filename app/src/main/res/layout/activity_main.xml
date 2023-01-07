@@ -9,11 +9,26 @@
     android:background="@drawable/home_background"
     android:fitsSystemWindows="true"
     >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="300dp"
+            android:visibility="visible" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/home_background">
+        android:orientation="vertical">
 
     <include android:id="@+id/include_toolbar" layout="@layout/home_toolbar"/>
 
@@ -28,10 +43,33 @@
         android:layout_margin="16dp"
         app:closeIcon="@drawable/ic_close"
         />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_rv_weather"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp">
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textColor="@color/white"
+            />
+
     </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_rv_weather"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
